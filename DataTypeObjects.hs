@@ -51,7 +51,7 @@ unionS s t = this where
 evens = this where
   this = Set {
     isEmpty = False,
-    contains = \n -> even n,
+    contains = even,
     insert   = insertS this,
     union    = unionS this
  }
@@ -60,7 +60,7 @@ evens = this where
 odds = this where
   this = Set {
     isEmpty = False,
-    contains = \n -> odd n,
+    contains = odd,
     insert   = insertS this,
     union    = unionS this
  }

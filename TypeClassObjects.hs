@@ -38,7 +38,7 @@ empty = Set Empty
 instance Set' Empty where
   isEmpty'  _   = True
   contains' _ _ = False
-  insert'       = insertS
+  insert'       = insertWrap
   union'    _ s = s
 
 
@@ -51,11 +51,11 @@ instance Set' Insert where
   contains' (Insert s n) m
       | n == m    = True
       | otherwise = contains s m
-  insert' = insertS
-  union'  = unionS
+  insert' = insertWrap
+  union'  = unionWrap
 
 -- | Helper function for use in other instances.
-insertS s n = Set (Insert (Set s) n)
+insertWrap s n = Set (Insert (Set s) n)
 
 
 -- ** Union of two sets
@@ -65,11 +65,11 @@ data Union = Union Set Set
 instance Set' Union where
   isEmpty'  (Union s t)   = isEmpty  s   && isEmpty  t
   contains' (Union s t) n = contains s n || contains t n
-  insert' = insertS
-  union'  = unionS
+  insert' = insertWrap
+  union'  = unionWrap
 
 -- | Helper function for use in other instances.
-unionS s t = Set (Union (Set s) t)
+unionWrap s t = Set (Union (Set s) t)
 
 
 --
@@ -84,8 +84,8 @@ evens = Set Evens
 instance Set' Evens where
   isEmpty'  _   = False
   contains' _ n = even n
-  insert'       = insertS
-  union'        = unionS
+  insert'       = insertWrap
+  union'        = unionWrap
 
 
 -- ** All odd numbers
@@ -96,8 +96,8 @@ odds = Set Odds
 instance Set' Odds where
   isEmpty'  _   = False
   contains' _ n = odd n
-  insert'       = insertS
-  union'        = unionS
+  insert'       = insertWrap
+  union'        = unionWrap
 
 
 --

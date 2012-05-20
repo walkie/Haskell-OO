@@ -20,49 +20,49 @@ data Set = Set {
 -- * Instances
 --
 
--- | Empty set
+-- | Empty set.
 empty = this where
   this = Set {
     isEmpty  = True,
     contains = const False,
-    insert   = insertS this,
+    insert   = insertObj this,
     union    = id
   }
 
--- | Insert an integer into a set
-insertS s n = this where
+-- | Insert an integer into a set.
+insertObj s n = this where
   this = Set {
     isEmpty  = False,
     contains = \m -> if n == m then True else contains s m,
-    insert   = insertS this,
-    union    = unionS  this
+    insert   = insertObj this,
+    union    = unionObj  this
   }
 
--- | Union of two sets
-unionS s t = this where
+-- | Union of two sets.
+unionObj s t = this where
   this = Set {
     isEmpty  = isEmpty s && isEmpty t,
     contains = \n -> contains s n || contains t n,
-    insert   = insertS this,
-    union    = unionS  this
+    insert   = insertObj this,
+    union    = unionObj  this
   }
 
--- | All even numbers
+-- | All even numbers.
 evens = this where
   this = Set {
     isEmpty = False,
     contains = even,
-    insert   = insertS this,
-    union    = unionS this
+    insert   = insertObj this,
+    union    = unionObj this
  }
 
--- | All odd numbers
+-- | All odd numbers.
 odds = this where
   this = Set {
     isEmpty = False,
     contains = odd,
-    insert   = insertS this,
-    union    = unionS this
+    insert   = insertObj this,
+    union    = unionObj this
  }
 
 
